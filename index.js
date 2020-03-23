@@ -3,7 +3,8 @@ const morgan= require("morgan")
 const app=express();
 var env = process.argv[2] || 'dev';
 
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
+app.use('/public', express.static('public'));
 app.use(morgan('dev'));
 
 switch (env) {
