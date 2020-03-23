@@ -2,10 +2,12 @@ const express= require("express")
 const morgan= require("morgan")
 const app=express();
 var env = process.argv[2] || 'dev';
+app.set('view engine', 'ejs');
 
 //app.use(express.static(__dirname + '/public'));
 app.use('/public', express.static('public'));
 app.use(morgan('dev'));
+app.use(express.json());
 
 switch (env) {
     case 'dev':
@@ -32,14 +34,14 @@ connection.connect(function(error){
 });
 connection.end();
 
-app.all('/',(req,res)=>{
+app.get('/',(req,res)=>{
 	res.render("index.ejs");
-})
+});
 
 app.post('/auth',(req,res)=> {
-    res.send("Hola");
+    res.json({username: "Hola", pass: "Mundo"});
     res.end();
-})
+});
 
 
 
