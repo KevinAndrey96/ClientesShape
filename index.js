@@ -10,9 +10,10 @@ app.all('/',(req,res)=>{
 var env = process.argv[2] || 'dev';
 switch (env) {
     case 'dev':
-        app.listen(3000, ()=>{
+        /*app.listen(3000, ()=>{
 			console.log("Running");
-		});
+		});*/
+		app.listen();
         break;
     case 'prod':
         app.listen();
