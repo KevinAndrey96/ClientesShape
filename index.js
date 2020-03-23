@@ -39,6 +39,7 @@ app.get('/',(req,res)=>{
 });
 
 app.post('/auth',(req,res)=> {
+  res.status(200);
     res.json({username: "Hola", pass: "Mundo"});
     res.end();
 });
