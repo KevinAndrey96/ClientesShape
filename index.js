@@ -8,6 +8,8 @@ app.set('view engine', 'ejs');
 app.use('/public', express.static('public'));
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 switch (env) {
     case 'dev':
