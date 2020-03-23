@@ -54,7 +54,7 @@ app.get('/',(req,res)=>{
 	res.render("index.ejs");
 });
 
-app.post('/auth',(req,res)=> {
+app.all('/auth',(req,res)=> {
     res.render("wait.ejs");
 });
 
