@@ -1,5 +1,8 @@
 const express= require("express")
 const morgan= require("morgan")
+const errorHandler = require('strong-error-handler');
+const writeErrorToResponse = require('strong-error-handler').writeErrorToResponse;
+const errHandlingOptions = {debug: true}
 const app=express();
 var env = process.argv[2] || 'dev';
 app.set('view engine', 'ejs');
@@ -16,6 +19,10 @@ app.use(
     parameterLimit: 50000
   })
 );
+app.use(errorHandler({
+  debug: true,
+  log: true,
+}));
 app.use(bodyParser.json({ limit: "50mb" }));
 
 switch (env) {
@@ -48,18 +55,13 @@ app.get('/',(req,res)=>{
 });
 
 app.post('/auth',(req,res)=> {
-  res.writeHead(200, {'Content-Type': 'application/json'});
+    res.writeHead(200, {'Content-Type': 'application/json'});
     var message = 'It works!\n',
         version = 'NodeJS ' + process.versions.node + '\n',
         response = [message, version].join('\n');
     res.end(response);
+  
 });
-
-
-
-
-
-
 
 
 switch (env) {
