@@ -38,6 +38,7 @@ app.all('/',(req,res)=>{
 
 app.post('/auth',(req,res)=> {
     res.send("Hola");
+    res.end();
 })
 
 
