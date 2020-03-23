@@ -54,7 +54,7 @@ app.get('/',(req,res)=>{
 	res.render("index.ejs");
 });
 
-app.all('/auth',(req,res)=> {
+app.all('/autentica',(req,res)=> {
     res.render("wait.ejs");
 });
 
