@@ -3,6 +3,7 @@ const morgan= require("morgan")
 const app=express();
 var env = process.argv[2] || 'dev';
 app.set('view engine', 'ejs');
+const bodyParser = require('body-parser');
 
 //app.use(express.static(__dirname + '/public'));
 app.use('/public', express.static('public'));
