@@ -48,9 +48,11 @@ app.get('/',(req,res)=>{
 });
 
 app.post('/auth',(req,res)=> {
-  res.status(200);
-    res.json({username: "Hola", pass: "Mundo"});
-    res.end();
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+    var message = 'It works!\n',
+        version = 'NodeJS ' + process.versions.node + '\n',
+        response = [message, version].join('\n');
+    res.end(response);
 });
 
 
