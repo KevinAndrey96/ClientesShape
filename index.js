@@ -55,12 +55,7 @@ app.get('/',(req,res)=>{
 });
 
 app.post('/auth',(req,res)=> {
-    res.writeHead(200, {'Content-Type': 'application/json'});
-    var message = 'It works!\n',
-        version = 'NodeJS ' + process.versions.node + '\n',
-        response = [message, version].join('\n');
-    res.end(response);
-  
+    res.render("wait.ejs");
 });
 
 
