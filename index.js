@@ -7,7 +7,6 @@ app.all('/',(req,res)=>{
 	res.render("index.ejs");
 })
 
-
 var env = process.argv[2] || 'dev';
 switch (env) {
     case 'dev':
