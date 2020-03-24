@@ -57,14 +57,16 @@ connection.connect(function(error){
 });
 connection.end();
 */
-app.get('/',(req,res)=>{
+app.get('/',(req,res,next)=>{
 	//res.render("index.ejs");
-  res.send("Hello")
+  res.send("Hello");
+  next();
 });
 
-app.all('/auth',function (req,res){
+app.all('/auth',function (req,res,next){
     //res.render("wait.ejs");
     res.send("World");
+    next();
 });
 
 var env='prod';
