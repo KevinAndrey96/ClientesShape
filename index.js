@@ -41,7 +41,7 @@ switch (env) {
         var host="localhost"
         break;
 }
-
+/*
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     host     : host,
@@ -57,7 +57,7 @@ connection.connect(function(error){
    }
 });
 connection.end();
-
+*/
 app.get('/',(req,res)=>{
 	res.render("index.ejs");
 });
