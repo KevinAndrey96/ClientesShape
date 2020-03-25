@@ -1,23 +1,23 @@
 const express= require("express")
-/*const morgan= require("morgan")
+const morgan= require("morgan")
 const errorHandler = require('strong-error-handler');
 const writeErrorToResponse = require('strong-error-handler').writeErrorToResponse;
-const errHandlingOptions = {debug: true}*/
+const errHandlingOptions = {debug: true}
 const app=express();
-//var env = process.argv[2] || 'dev';
-//app.set('view engine', 'ejs');
-//const bodyParser = require('body-parser');
+var env = process.argv[2] || 'dev';
+app.set('view engine', 'ejs');
+const bodyParser = require('body-parser');
 
 app.use('/public', express.static('public'));
-//app.use(morgan('dev'));
-/*app.use(express.json());
+app.use(morgan('dev'));
+app.use(express.json());
 app.use(
   bodyParser.urlencoded({
     limit: "50mb",
     extended: true,
     parameterLimit: 50000
   })
-);*//*
+);
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Credentials', true);
@@ -56,10 +56,10 @@ connection.connect(function(error){
    }
 });
 connection.end();
-*/
+
 app.get('/',(req,res,next)=>{
-	//res.render("index.ejs");
-  res.send("Hello");
+	res.render("index.ejs");
+  //res.send("Hello");
   next();
 });
 
@@ -69,7 +69,6 @@ app.all('/auth',function (req,res,next){
     next();
 });
 
-var env='prod';
 switch (env) {
     case 'dev':
         app.listen(3000, ()=>{console.log("Running");});
