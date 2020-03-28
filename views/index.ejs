@@ -23,11 +23,26 @@
     <link rel="stylesheet" type='text/css' href="public/assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <body class="">
-
+    <% if(login=="Wrong")
+    {
+        %>
+        <script type="text/javascript">
+            Swal.fire({
+              title: "<i>Login Incorrecto</i>", 
+              html: "Por favor verifique usuario y/o clave",
+              confirmButtonText: "Ok", 
+            });
+        </script>
+        <%
+    }
+    %>
+    
+        
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
@@ -37,14 +52,14 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form method="POST" action="/auth">
+                    <form method="POST" action="">
                         <div class="form-group">
                             <label>Correo Electrónico</label>
-                            <input type="email" class="form-control" placeholder="Correo Electrónico" value="kaherreras@unal.edu.co">
+                            <input type="email" class="form-control" placeholder="Correo Electrónico" name="EMAIL" value="kaherreras@unal.edu.co">
                         </div>
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input type="password" class="form-control" placeholder="Contraseña" value="123456">
+                            <input type="password" name="PASS" class="form-control" placeholder="Contraseña" value="123456">
                         </div>
                         <div class="checkbox">
                             <!--<label>

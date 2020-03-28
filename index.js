@@ -1,5 +1,11 @@
 const express= require("express")
 const morgan= require("morgan")
+const { User } = require('./models')
+const crypto = require("crypto")
+const swal = require('sweetalert');
+const session = require('express-session')
+var cookieParser = require('cookie-parser')
+
 const errorHandler = require('strong-error-handler');
 const writeErrorToResponse = require('strong-error-handler').writeErrorToResponse;
 const errHandlingOptions = {debug: true}
@@ -41,37 +47,57 @@ switch (env) {
         break;
 }
 
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host     : host,
-    user     : 'shape_hosting',
-    password : 'Shape2020@',
-    database : 'shape_hosting'
-});
-connection.connect(function(error){
-   if(error){
-      throw error;
-   }else{
-      console.log('Conexion correcta.');
-   }
-});
-connection.end();
+app.use(cookieParser());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
+
 
 app.get('/',(req,res,next)=>{
-	res.render("index.ejs");
+	res.render("index",{login: "None"});
   //res.send("Hello");
   next();
 });
+app.post('/',(req,res)=>{
 
-app.all('/auth',function (req,res,next){
-    //res.render("wait.ejs");
-    res.send("World");
-    next();
+const users = User.findOne({
+   where: {
+    email:req.body.EMAIL,
+    password:crypto.createHash('sha1').update(req.body.PASS).digest('hex')
+  }
+}).then(function(users){
+  if(users==null)
+  {
+    res.render("index",{login: "Wrong"})
+  }else
+  {
+    session.USER=users.email
+    
+    res.redirect("/dashboard");
+    //res.send("SEssion correcta"+req.session.USER);
+  }
+}).catch(function(err){
+  console.log('Oops! something went wrong, : ', err);
+});
+  
+})
+
+app.get('/dashboard',function (req,res,next){
+  if(session.USER){ 
+      res.send('Hola: ' + session.USER);
+   }else{
+      res.redirect("/")
+   }
 });
 
 switch (env) {
     case 'dev':
-        app.listen(3000, ()=>{console.log("Running");});
+        app.listen(3000, ()=>{
+          console.log("Running");
+        });
     //app.listen();
         break;
     case 'prod':

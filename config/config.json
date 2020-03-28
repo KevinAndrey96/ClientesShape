@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "shape_hosting",
+    "password": "Shape2020@",
+    "database": "shape_hosting",
+    "host": "67.205.184.22",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "Shape2020@",
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "shape_hosting",
+    "password": "Shape2020@",
+    "database": "shape_hosting",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
