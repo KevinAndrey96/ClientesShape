@@ -1,6 +1,6 @@
 const express= require("express")
 const morgan= require("morgan")
-const { User } = require('./models')
+const { User, Domain } = require('./models')
 const crypto = require("crypto")
 const passport = require('passport');
 const session = require('express-session')
@@ -32,6 +32,8 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.set('trust proxy', 1)
 app.use(session({
   secret: 'keyboardcat',
+  resave: true,
+  saveUninitialized: true,
   cookie: {
     path    : '/',
     httpOnly: false,
@@ -107,9 +109,12 @@ app.post('/',(req,res,next)=>{
  })(req, res, next);
 });
 
-app.get('/dashboard', isAuthenticated ,function (req,res,next){
-  //res.send("Bienvenido"+req.user.firstName)
-  res.render("dashboard")
+app.get('/dashboard', isAuthenticated ,async (req,res,next) =>{
+  //Domain.findAll().then(domain => domain)
+  const domains = await Domain.findAll();
+  console.log(domains.every(domain => domain instanceof Domain)); // true
+  //console.log("All domains:", JSON.stringify(domains, null, 2));
+  res.render("dashboard",{domains: domains})
 });
 
 app.get('/logout', function(req, res) {

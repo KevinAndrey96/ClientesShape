@@ -29,6 +29,15 @@ module.exports = {
       ns4: {
         type: Sequelize.STRING
       },
+      price: {
+        type: Sequelize.STRING
+      },
+      status: {
+        type: Sequelize.STRING
+      },
+      IdUser: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
