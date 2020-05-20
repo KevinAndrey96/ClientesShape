@@ -13,6 +13,11 @@ function formatDate(date) {
 
 return [year, month, day].join('-');
 }
+
+var formatter = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+  });
 %>
 
 
@@ -54,7 +59,7 @@ return [year, month, day].join('-');
                         <strong class="card-title">Dominios</strong>
                     </div>
                     <div class="card-body">
-                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <table id="bootstrap-data-table" class="display table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>Dominio</th>
@@ -74,7 +79,7 @@ return [year, month, day].join('-');
                                     <td><%=formatDate(domain.registration)%></td>
                                     <td><%=formatDate(domain.expiration)%></td>
                                     <td><%=domain.status%></td>
-                                    <td><%=domain.price%></td>
+                                    <td><%=formatter.format(domain.price)%></td>
                                     <td><%=domain.ns1%>
                                     	<%=domain.ns2%>
                                     	<%=domain.ns3%>
@@ -86,12 +91,59 @@ return [year, month, day].join('-');
                             	%>                                
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
 
 
         </div>
+
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Servidores</strong>
+                    </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table" class="display table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Dominio</th>
+                                    <th>Registro</th>
+                                    <th>Expiración</th>
+                                    <th>Paquete</th>
+                                    <th>Precio</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<%
+                            	servers.forEach(server => { 
+                            	%>
+								  <tr>
+                                    <td><%=server.domain%></td>
+                                    <td><%=formatDate(server.registration)%></td>
+                                    <td><%=formatDate(server.expiration)%></td>
+                                    <td><%=server.IdPackage%></td>
+                                    <td><%=formatter.format(server.price)%></td>
+                                    <td><%=server.status%></td>
+                                </tr>
+                                <%
+								}); 
+                            	%>                                
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
     </div><!-- .animated -->
 </div><!-- .content -->
 <script src="public/assets/js/lib/data-table/datatables.min.js"></script>
@@ -108,7 +160,7 @@ return [year, month, day].join('-');
 
 <script type="text/javascript">
     $(document).ready(function() {
-      $('#bootstrap-data-table-export').DataTable();
+      $('table.display').DataTable();
   } );
 </script>
 <%- include('Layouts/Footer.ejs') %>

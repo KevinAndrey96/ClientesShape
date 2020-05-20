@@ -1,6 +1,6 @@
 const express= require("express")
 const morgan= require("morgan")
-const { User, Domain } = require('./models')
+const { User, Domain, Server } = require('./models')
 const crypto = require("crypto")
 const passport = require('passport');
 const session = require('express-session')
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json({ limit: "50mb" }));
 app.set('trust proxy', 1)
 app.use(session({
-  secret: 'keyboardcat',
+  secret: 'keyboardca2',
   resave: true,
   saveUninitialized: true,
   cookie: {
@@ -79,7 +79,7 @@ passport.use(new LocalStrategy(
   }).catch(function(err) {
     console.log("Error:", err);
     return done(null, false, {
-      message: 'Something went wrong with your Signin'
+      message: 'Algo salió mal'
     });
   });
 }
@@ -114,7 +114,10 @@ app.get('/dashboard', isAuthenticated ,async (req,res,next) =>{
   const domains = await Domain.findAll();
   console.log(domains.every(domain => domain instanceof Domain)); // true
   //console.log("All domains:", JSON.stringify(domains, null, 2));
-  res.render("dashboard",{domains: domains})
+
+  const servers = await Server.findAll();
+  console.log(servers.every(server => server instanceof Server)); // true
+  res.render("dashboard",{domains: domains, servers:servers})
 });
 
 app.get('/logout', function(req, res) {

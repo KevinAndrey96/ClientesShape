@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     ns2: DataTypes.STRING,
     ns3: DataTypes.STRING,
     ns4: DataTypes.STRING,
-    price: DataTypes.STRING,
+    price: DataTypes.DOUBLE,
     status: DataTypes.STRING,
     IdUser: DataTypes.INTEGER,
   }, {});
