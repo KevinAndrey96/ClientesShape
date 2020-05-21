@@ -66,7 +66,7 @@ var formatter = new Intl.NumberFormat('es-CO', {
                                     <th>Registro</th>
                                     <th>Expiración</th>
                                     <th>Estado</th>
-                                    <th>Precio</th>
+                                    <th style="display: none;">Precio</th>
                                     <th>NameServers</th>
                                 </tr>
                             </thead>
@@ -79,7 +79,7 @@ var formatter = new Intl.NumberFormat('es-CO', {
                                     <td><%=formatDate(domain.registration)%></td>
                                     <td><%=formatDate(domain.expiration)%></td>
                                     <td><%=domain.status%></td>
-                                    <td><%=formatter.format(domain.price)%></td>
+                                    <td style="display: none;"><%=formatter.format(domain.price)%></td>
                                     <td><%=domain.ns1%>
                                     	<%=domain.ns2%>
                                     	<%=domain.ns3%>
@@ -115,7 +115,7 @@ var formatter = new Intl.NumberFormat('es-CO', {
                                     <th>Registro</th>
                                     <th>Expiración</th>
                                     <th>Paquete</th>
-                                    <th>Precio</th>
+                                    <th style="display: none;">Precio</th>
                                     <th>Estado</th>
                                 </tr>
                             </thead>
@@ -128,7 +128,7 @@ var formatter = new Intl.NumberFormat('es-CO', {
                                     <td><%=formatDate(server.registration)%></td>
                                     <td><%=formatDate(server.expiration)%></td>
                                     <td><%=server.IdPackage%></td>
-                                    <td><%=formatter.format(server.price)%></td>
+                                    <td style="display: none;"><%=formatter.format(server.price)%></td>
                                     <td><%=server.status%></td>
                                 </tr>
                                 <%
