@@ -111,11 +111,19 @@ app.post('/',(req,res,next)=>{
 
 app.get('/dashboard', isAuthenticated ,async (req,res,next) =>{
   //Domain.findAll().then(domain => domain)
-  const domains = await Domain.findAll();
+  const domains = await Domain.findAll({
+    where: {
+      IdUser: req.user.id
+    }
+  });
   console.log(domains.every(domain => domain instanceof Domain)); // true
   //console.log("All domains:", JSON.stringify(domains, null, 2));
 
-  const servers = await Server.findAll();
+  const servers = await Server.findAll({
+    where: {
+      IdUser: req.user.id
+    }
+  });
   console.log(servers.every(server => server instanceof Server)); // true
   res.render("dashboard",{domains: domains, servers:servers})
 });

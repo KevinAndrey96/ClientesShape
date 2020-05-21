@@ -22,7 +22,19 @@ module.exports = {
       IdUser: 1,
       createdAt: new Date(),
       updatedAt: new Date()
-    }]);
+    },
+    {
+      domain: 'legamio.com',
+      registration: "2019-05-09 00:00:00",
+      expiration: "2021-05-09 00:00:00",
+      price: '200000',
+      status: 'Active',
+      IdPackage: 4,
+      IdUser: 4,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+  ]);
   },
 
   down: (queryInterface, Sequelize) => {
